@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body {
+  height: 100%;
+}
+
+body {
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: greyscale;
+}
+
+:root {
+  --text-main: #030303;
+  --text-secondary: #f5f9ff;
+  --bg-active: #d1d1dc;
+}
+
+html.dark,
+html[data-theme='dark'] {
+  --text-main: #f7f7f7;
+  --text-secondary: #ffffff;
+  --bg-active: #fbfcff;
+}
+
+.table th:first-child {
+  position: relative;
+  z-index: 2;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(calc(80%));
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-calc(15%));
+}
+
+
+
+
+
+.colors3333{
+  colors2: #c9f31d;
+   colors2: #ff5f0b;
+  colors2: #43ebef; 
+  colors2: #1999e5; 
+  colors2: #230b2c;
+   colors2: #628be8;
+    colors2: #aa5343; 
+    colors2: #c9fa89; 
+    colors2: #e88ea8;
+     colors2: #72e4a2; 
+     colors2: #38cd87; 
+     colors2: #515e13;
+      colors2: #eaf7f6; 
+     colors2: #83dd6e;
+      colors2: #e8b203;
+       colors2: #7d11d5; 
+       colors2: #3e4927;
+        colors2: #f303e2;
+         colors2: #249493;
+          colors2: #50e5e6; 
+          colors2: #11deb2; 
+          colors2: #a2f9c7;
+           colors2: #2a7bdc;
+            colors2: #47383a; 
+            colors2: #226da4; colors2: #966319; colors2: #1bdf99; colors2: #f3ab0c; colors2: #961f50; colors2: #832efd; colors2: #875287; colors2: #4bebe7; colors2: #1d3d2e; colors2: #9caea4; colors2: #2772f5; colors2: #938bf1; colors2: #6228a5; colors2: #24fea5; colors2: #c9bbc8; colors2: #e27225; colors2: #54bd9f; colors2: #babb2d; colors2: #bcf591; colors2: #803b36; colors2: #124f03
+}
