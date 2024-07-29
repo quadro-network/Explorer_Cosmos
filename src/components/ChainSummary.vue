@@ -75,4 +75,31 @@ height: 120px;
   }
 }
 
+
+@media (max-width: 768px) {
+ 
+  .card_explorer {
+  justify-content: center; 
+  align-items: center;
+ width: 150px;
+ height: 184px;
+ margin-top: 15%;
+ border-radius: 30px;
+ margin-left: 100px;
+ margin-bottom: 40px;
+ background: #212121;
+ box-shadow:  10px 5px 30px rgb(25, 25, 25),
+ -10px -10px 10px rgb(60, 60, 60);
+}
+
+.logo_chain {
+width: 120px;
+height: 120px;
+  transition: transform 0.5s ease;
+}
+
+
+
+}
+
 </style>

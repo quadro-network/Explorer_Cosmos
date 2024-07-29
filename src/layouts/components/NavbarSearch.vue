@@ -70,28 +70,41 @@ function confirm() {
         class="text-2xl text-grey-500 dark:text-grey-400"
       />
     </button>
-    <div class="flex items-center rounded-lg #saved  border border-grey-200 dark:border-grey-700 mt-3">
-     
-      <input 
-      placeholder="Height/Transaction/Account Address"
-              @keyup.enter="confirm"
-      class="px-4 h-10 bg-transparent flex-1 outline-none text-base"  v-model="searchQuery" />
-      <div class="px-4 text-base hidden md:!block">
-        
-        <div
-              class="mt-2 text-right text-sm text-error"
-              v-show="errorMessage"
-            >
-              {{ errorMessage }}
-            </div>
-      </div>
+    <div class="flex search_tx items-center rounded-lg border border-grey-200 dark:border-grey-700 mt-3">
+  <input 
+    placeholder="Height/Transaction/Account Address"
+    @keyup.enter="confirm"
+    class="px-4 h-10 bg-transparent flex-1 search_tx outline-none text-base"  
+    v-model="searchQuery" 
+  />
+  <div class="px-4 text-base hidden md:!block mr-4">
+    <div
+      class="mt-2 text-right text-sm text-error"
+      v-show="errorMessage"
+    >
+      {{ errorMessage }}
     </div>
+  </div>
+</div>
+
+
+
 
 </template>
 
 
+<style scoped>
+.right-margin {
+  right: 50%; 
+}
 
-<!-- 
-<button @click="confirm">
-  <Icon icon="mdi:magnify" class="text-2xl text-grey-400 ml-3"/>
-</button> -->
+@media (max-width: 768px) {
+ 
+  .search_tx {
+ font-size: 13px;
+ width: 200px;
+ margin-right: 10%;
+}
+}
+
+</style>

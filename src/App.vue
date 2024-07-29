@@ -16,7 +16,7 @@ onMounted(() => {
 </template>
 <style scoped>
 .fullscreen-background {
-  
+  width: 100%;
   background-size: cover;
   background-position: center;
   min-height: 100vh;

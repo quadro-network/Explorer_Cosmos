@@ -8,9 +8,31 @@
     </title>
     <meta name="description" content="Start Explore!" />
     
+<style>
+.fullscreen-background {
+
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  background-color: black;
+}
+
+
+@media (max-width: 768px) {
+  .fullscreen-background {
+  width: 115%;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  background-color: black;
+}
+}
+</style>
+
+
   </head>
   <body>
-    <div id="app">
+    <div class="fullscreen-background" id="app">
     </div>
     <script type="module" src="/src/main.ts"></script>
 
