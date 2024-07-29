@@ -48,12 +48,17 @@ const setNetworkType = (type: string) => {
 <template>
   <div class="">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div class="flex avat md:flex-row flex-col items-center justify-center mb-6 mt-14 gap-2">
       <div class="w-80 rounded-full overflow-hidden avat" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
 =======
     <div class="flex md:flex-row flex-col items-center justify-center mb-6 mt-14 gap-2">
       <div class="w-80 rounded-full overflow-hidden" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
 >>>>>>> ce19461 (xXxplorer)
+=======
+    <div class="flex avat md:flex-row flex-col items-center justify-center mb-6 mt-14 gap-2">
+      <div class="w-80 rounded-full overflow-hidden avat" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+>>>>>>> ac113ca (updated)
         <img class="w-full h-full" src="https://assets.quadro.network/img/me.png" style="width: 280px; height: 230px; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;" />
       </div>
     </div>
@@ -69,6 +74,7 @@ const setNetworkType = (type: string) => {
     </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div v-if="featured.length > 0" class="text-center text-base mt-6 #saved">
       <h2 class="mb-6">Recommended Blockchains 🪩</h2>
 =======
@@ -76,6 +82,10 @@ const setNetworkType = (type: string) => {
     <div v-if="featured.length > 0" class="text-center text-base mt-6  #saved">
       <h2 class="mb-6"> Recommended Blockchains 🪩 </h2>
 >>>>>>> ce19461 (xXxplorer)
+=======
+    <div v-if="featured.length > 0" class="text-center text-base mt-6 #saved">
+      <h2 class="mb-6">Recommended Blockchains 🪩</h2>
+>>>>>>> ac113ca (updated)
     </div>
 
     <div v-if="featured.length > 0" class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5">
@@ -89,13 +99,17 @@ const setNetworkType = (type: string) => {
     </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> ce19461 (xXxplorer)
+=======
+>>>>>>> ac113ca (updated)
     <div class="tabs">
       <button class="btn_menu_explorer text-secondary btn_menu_expl" @click="setNetworkType('all')" :class="{ active: selectedNetworkType === 'all' }">All</button>
       <button class="btn_menu_explorer text-secondary btn_menu_expl" @click="setNetworkType('mainnet')" :class="{ active: selectedNetworkType === 'mainnet' }">Mainnet</button>
       <button class="btn_menu_explorer text-secondary btn_menu_expl" @click="setNetworkType('testnet')" :class="{ active: selectedNetworkType === 'testnet' }">Testnet</button>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
       <div class="search-box">
@@ -107,15 +121,22 @@ const setNetworkType = (type: string) => {
     </div>
 =======
     
+=======
+
+>>>>>>> ac113ca (updated)
       <div class="search-box">
-      <div class="chain-box">
-        <input v-model="keywords" type="text" name="" required>
-        <label>Search Chain Name</label>
+        <div class="chain-box">
+          <input v-model="keywords" type="text" name="" required>
+          <label>Search Chain Name</label>
+        </div>
       </div>
     </div>
+<<<<<<< HEAD
     </div>
  
 >>>>>>> ce19461 (xXxplorer)
+=======
+>>>>>>> ac113ca (updated)
 
     <div class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5">
       <ChainSummary v-for="(chain, index) in chains" :key="index" :name="chain.chainName" />
@@ -126,7 +147,6 @@ const setNetworkType = (type: string) => {
     <div class="foot"></div>
   </footer>
 </template>
-
 
 <style scoped>
 .tabs {
@@ -142,10 +162,14 @@ const setNetworkType = (type: string) => {
 
 .search-box {
 <<<<<<< HEAD
+<<<<<<< HEAD
   position: absolute; 
 =======
   position: absolute; /* Или fixed, если вы хотите, чтобы элемент оставался на месте при прокрутке */
 >>>>>>> ce19461 (xXxplorer)
+=======
+  position: absolute; 
+>>>>>>> ac113ca (updated)
 margin-bottom: 5em;
   width: 450px;
   background: rgba(0,0,0,.5);
@@ -370,7 +394,7 @@ strong {
 }
 
 .btn_menu_explorer:hover {
-  /* transform: scale(1.1); */
+
   color: #c9f31d;
   border-bottom: #c9f31d solid 2px;
 
@@ -382,11 +406,88 @@ strong {
   justify-content: center; 
   align-items: center;
   background-color: transparent;
-
   background-origin: border-box;
   background-clip: content-box, border-box;
   animation: none;
   border-radius: 7rem; 
   width: 165px;
 }
+
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: column;
+    margin-top: -30px;
+  }
+
+
+  .btn_menu_explorer {
+    width: 100%;
+    max-width: 200px;
+    font-size: 13px;
+    margin-right: 50%;
+    height:  40px;
+  }
+
+  .search-box {
+    margin-top: 100px;
+    top: 60%;
+    right: 50%;
+    width: 150px;
+    font-size: 10px;
+  }
+  .search-box .chain-box {
+  position: relative;
+  font-size: 10px;
+}
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+
+@media (max-width: 360px) {
+  .tabs {
+    flex-direction: column;
+  }
+
+
+  .btn_menu_explorer {
+    width: 100%;
+    max-width: 150px;
+    font-size: 10px;
+    margin-right: 50%;
+  }
+
+  .search-box {
+    margin-top: 100px;
+    top: 60%;
+    width: 150px;
+  }
+  .search-box .chain-box {
+  position: relative;
+  font-size: 10px;
+}
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
 </style>

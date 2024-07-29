@@ -76,6 +76,9 @@ height: 120px;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ac113ca (updated)
 
 @media (max-width: 768px) {
  
@@ -103,6 +106,9 @@ height: 120px;
 
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ce19461 (xXxplorer)
+=======
+>>>>>>> ac113ca (updated)
 </style>
