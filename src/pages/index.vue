@@ -47,8 +47,13 @@ const setNetworkType = (type: string) => {
 </script>
 <template>
   <div class="">
+<<<<<<< HEAD
     <div class="flex avat md:flex-row flex-col items-center justify-center mb-6 mt-14 gap-2">
       <div class="w-80 rounded-full overflow-hidden avat" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+=======
+    <div class="flex md:flex-row flex-col items-center justify-center mb-6 mt-14 gap-2">
+      <div class="w-80 rounded-full overflow-hidden" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">
+>>>>>>> ce19461 (xXxplorer)
         <img class="w-full h-full" src="https://assets.quadro.network/img/me.png" style="width: 280px; height: 230px; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;" />
       </div>
     </div>
@@ -63,8 +68,14 @@ const setNetworkType = (type: string) => {
       <progress class="progress progress-info w-80 h-1"></progress>
     </div>
 
+<<<<<<< HEAD
     <div v-if="featured.length > 0" class="text-center text-base mt-6 #saved">
       <h2 class="mb-6">Recommended Blockchains 🪩</h2>
+=======
+
+    <div v-if="featured.length > 0" class="text-center text-base mt-6  #saved">
+      <h2 class="mb-6"> Recommended Blockchains 🪩 </h2>
+>>>>>>> ce19461 (xXxplorer)
     </div>
 
     <div v-if="featured.length > 0" class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5">
@@ -77,10 +88,15 @@ const setNetworkType = (type: string) => {
       <h2 class="mb-6">{{ $t('pages.description') }}</h2>
     </div>
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> ce19461 (xXxplorer)
     <div class="tabs">
       <button class="btn_menu_explorer text-secondary btn_menu_expl" @click="setNetworkType('all')" :class="{ active: selectedNetworkType === 'all' }">All</button>
       <button class="btn_menu_explorer text-secondary btn_menu_expl" @click="setNetworkType('mainnet')" :class="{ active: selectedNetworkType === 'mainnet' }">Mainnet</button>
       <button class="btn_menu_explorer text-secondary btn_menu_expl" @click="setNetworkType('testnet')" :class="{ active: selectedNetworkType === 'testnet' }">Testnet</button>
+<<<<<<< HEAD
 
       <div class="search-box">
         <div class="chain-box">
@@ -89,6 +105,17 @@ const setNetworkType = (type: string) => {
         </div>
       </div>
     </div>
+=======
+    
+      <div class="search-box">
+      <div class="chain-box">
+        <input v-model="keywords" type="text" name="" required>
+        <label>Search Chain Name</label>
+      </div>
+    </div>
+    </div>
+ 
+>>>>>>> ce19461 (xXxplorer)
 
     <div class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5">
       <ChainSummary v-for="(chain, index) in chains" :key="index" :name="chain.chainName" />
@@ -99,6 +126,7 @@ const setNetworkType = (type: string) => {
     <div class="foot"></div>
   </footer>
 </template>
+
 
 <style scoped>
 .tabs {
@@ -113,7 +141,11 @@ const setNetworkType = (type: string) => {
 }
 
 .search-box {
+<<<<<<< HEAD
   position: absolute; 
+=======
+  position: absolute; /* Или fixed, если вы хотите, чтобы элемент оставался на месте при прокрутке */
+>>>>>>> ce19461 (xXxplorer)
 margin-bottom: 5em;
   width: 450px;
   background: rgba(0,0,0,.5);
@@ -183,6 +215,7 @@ margin-bottom: 5em;
   background-origin: border-box;
   background-clip: content-box, border-box;
 }
+<<<<<<< HEAD
 
 strong {
   z-index: 4;
@@ -306,6 +339,54 @@ strong {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+=======
+>>>>>>> ce19461 (xXxplorer)
 
+strong {
+  z-index: 4;
+  font-style: normal;
+  font-size: 16px;
+  margin-left: 2%;
+}
 
+.circle-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: orbit 5s linear infinite;
+}
+
+.circle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  filter: blur(2rem);
+}
+
+.circle:nth-of-type(1) {
+  background: #c9f31d;
+  animation: orbit 8s linear infinite;
+}
+
+.btn_menu_explorer:hover {
+  /* transform: scale(1.1); */
+  color: #c9f31d;
+  border-bottom: #c9f31d solid 2px;
+
+  background-color: transparent;
+}
+
+.btn_menu_expl:active {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  background-color: transparent;
+
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  animation: none;
+  border-radius: 7rem; 
+  width: 165px;
+}
 </style>

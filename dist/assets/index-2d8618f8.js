@@ -1,0 +1,1 @@
+import{d as s,a as r,k as t,J as a,L as n}from"./index-61bbdb05.js";const _=s({__name:"index",props:["chain"],setup(o){r("blocks");const e=t();return a(),n(()=>e.recents),(c,p)=>null}});export{_ as default};

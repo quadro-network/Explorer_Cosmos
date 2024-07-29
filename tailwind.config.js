@@ -14,7 +14,7 @@ module.exports = {
         customGreen: '#c9f31d',
         customBlack: '#373834',
         customLime: '#DCE828',
-        customChocko: '#24331A',
+        customChocko: '#141413',
         customBg: '#E5F79B',
         customMilk: '#eaf7f6',
         customDark: '#000000'

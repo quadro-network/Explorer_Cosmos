@@ -75,6 +75,7 @@ height: 120px;
   }
 }
 
+<<<<<<< HEAD
 
 @media (max-width: 768px) {
  
@@ -102,4 +103,6 @@ height: 120px;
 
 }
 
+=======
+>>>>>>> ce19461 (xXxplorer)
 </style>
