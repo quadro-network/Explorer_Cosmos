@@ -1,6 +1,7 @@
 {
     "chain_name": "crossfi",
     "registry_name": "crossfi",
+    "network_type": "testnet",
     "api": [
         {"provider": "Quadro.Network", "address": "https://api.crossfi.quadro.network"},
         {"provider": "STAKR.space", "address": "https://crossfi.api.srv.stakr.space"}
