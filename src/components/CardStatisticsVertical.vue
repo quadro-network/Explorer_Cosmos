@@ -8,7 +8,7 @@ interface Props {
   icon: string;
   stats: string;
   change?: number;
-  subtitle?: string;
+ subtitle?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -22,13 +22,13 @@ const isPositive = controlledComputed(
 </script>
 
 <template>
-  <div class="#saved shadow rounded p-4">
+  <div class="#saved cardStatistic text-secondary shadow rounded p-4">
     <div  class="flex items-center justify-center">
       <div 
         v-if="props.icon"
-        class="relative w-9 h-9 rounded overflow-hidden flex items-center justify-center"
+        class="relative w-15 h-15 rounded overflow-hidden flex items-center justify-center"
       >
-        <Icon :class="[`text-${props?.color}`]" :icon="props.icon" size="32" />
+        <Icon :class="[`text-${props?.color}`]"  :icon="props.icon" size="32" />
         <div
           class="absolute top-0 left-0 bottom-0 right-0 opacity-20"
           :class="[`bg-${props?.color}`]"
@@ -38,7 +38,7 @@ const isPositive = controlledComputed(
       <div
         v-if="props.change"
         :class="isPositive ? 'text-base-content' : 'text-error'"
-        class="flex items-center text-sm font-semibold"
+        class="flex items-center text-secondary text-sm font-semibold"
       >
         <span>{{ isPositive ? `+${props.change}` : props.change }}%</span>
         <Icon :icon="isPositive ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
@@ -49,7 +49,7 @@ const isPositive = controlledComputed(
       <h6 class="text-lg text-center font-semibold mt-2 mb-1">
         {{ props.stats || '-'}}
       </h6>
-      <p class="text-sm text-center">
+      <p class="text-sm title2 text-center">
         {{ props.title }}
       </p>
 

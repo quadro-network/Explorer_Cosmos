@@ -1,6 +1,7 @@
 {
     "chain_name": "cosmos",
     "registry_name": "cosmoshub",
+    "network_type": "mainnet",
     "api": [
         {"provider": "notional", "address": "https://api-cosmoshub-ia.cosmosia.notional.ventures"},
         {"provider": "blockapsis", "address": "https://lcd-cosmoshub.blockapsis.com:443"},

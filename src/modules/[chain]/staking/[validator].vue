@@ -35,7 +35,7 @@ const avatars = ref(cache || {});
 const identity = ref('');
 const rewards = ref([] as Coin[] | undefined);
 const commission = ref([] as Coin[] | undefined);
-const delegations = ref({} as PaginatedDelegations)
+const delegations = ref({} as PaginatedDelegations);
 const addresses = ref(
   {} as {
     account: string;
@@ -191,72 +191,76 @@ function pageload(p: number) {
   page.setPage(p);
   page.limit = 10;
 
-  blockchain.rpc.getStakingstakingDelegations(validator, page).then(res => {
-      delegations.value = res
-  }) 
+  const queryString = `${validator}?${page.toQueryString()}`;
+  blockchain.rpc.getStakingDelegations(queryString).then((res: any) => {
+    delegations.value = res;
+  });
 }
 
-const events = ref({} as PaginatedTxs)
+const events = ref({} as PaginatedTxs);
 
 enum EventType {
   Delegate = 'delegate',
   Unbond = 'unbond',
 }
 
-const selectedEventType = ref(EventType.Delegate)
+const selectedEventType = ref(EventType.Delegate);
 
 function loadPowerEvents(p: number, type: EventType) {
-  selectedEventType.value = type
+  selectedEventType.value = type;
   page.setPage(p);
   page.setPageSize(5);
-  blockchain.rpc.getTxs("?order_by=2&events={type}.validator='{validator}'", { type: selectedEventType.value, validator }, page).then(res => {
-    events.value = res
-  })
+
+  const queryString = `?order_by=2&events=${type}.validator='${validator}'&${page.toQueryString()}`;
+  blockchain.rpc.getTxs(queryString, { type, validator }).then((res: any) => {
+    events.value = res;
+  });
 }
 
 function pagePowerEvents(page: number) {
-    loadPowerEvents(page, selectedEventType.value)
+  loadPowerEvents(page, selectedEventType.value);
 }
 
-pagePowerEvents(1)
+pagePowerEvents(1);
 
-function mapEvents(events: {type: string, attributes: {key: string, value: string}[]}[]) {
+function mapEvents(events: { type: string, attributes: { key: string, value: string }[] }[]) {
   const attributes = events
-    .filter(x => x.type=== selectedEventType.value)
-      .filter(x => x.attributes.findIndex(attr => attr.value === validator || attr.value === toBase64(stringToUint8Array(validator))) > -1)
-      .map(x => {
-    // check if attributes need to decode
-    const output = {} as {[key: string]: string }
+    .filter(x => x.type === selectedEventType.value)
+    .filter(x => x.attributes.findIndex(attr => attr.value === validator || attr.value === toBase64(stringToUint8Array(validator))) > -1)
+    .map(x => {
+      // check if attributes need to decode
+      const output = {} as { [key: string]: string };
 
-    if(x.attributes.findIndex(a => a.key === `amount`) > -1) {
-      x.attributes.forEach(attr => {
-        output[attr.key] = attr.value
-      })
-    } else x.attributes.forEach(attr => {
-      output[uint8ArrayToString(fromBase64(attr.key))] = uint8ArrayToString(fromBase64(attr.value))
-    })
-    return output
-  })  
+      if (x.attributes.findIndex(a => a.key === `amount`) > -1) {
+        x.attributes.forEach(attr => {
+          output[attr.key] = attr.value;
+        });
+      } else {
+        x.attributes.forEach(attr => {
+          output[uint8ArrayToString(fromBase64(attr.key))] = uint8ArrayToString(fromBase64(attr.value));
+        });
+      }
+      return output;
+    });
 
-  return attributes
-
+  return attributes;
 }
 
 function mapDelegators(messages: any[]) {
-  if(!messages) return []
-  return Array.from(new Set(messages.map(x => x.delegator_address || x.grantee)))
+  if (!messages) return [];
+  return Array.from(new Set(messages.map(x => x.delegator_address || x.grantee)));
 }
-
 </script>
+
 <template>
   <div>
-    <div class="bg-base-100 px-4 pt-3 pb-4 rounded shadow border-indigo-500">
+    <div class="bg-customDark px-4 pt-3 pb-4 rounded shadow border-lime-500">
       <div class="flex flex-col lg:!flex-row pt-2 pb-1">
         <div class="flex-1">
           <div class="flex">
-            <div class="avatar mr-4 relative w-24 rounded-lg overflow-hidden">
-              <div class="w-24 rounded-lg absolute opacity-10"></div>
-              <div class="w-24 rounded-lg">
+            <div class="avatar mr-4 relative w-30 border rounded-lg overflow-hidden">
+              <div class="w-30 rounded-lg absolute opacity-10"></div>
+              <div class="w-30 rounded-lg">
                 <img
                   v-if="identity && avatars[identity] !== 'undefined'"
                   v-lazy="logo(identity)"
@@ -281,7 +285,7 @@ function mapDelegators(messages: any[]) {
               </div>
               <label
                 for="delegate"
-                class="btn btn-primary btn-sm w-full"
+                class="btn btn-customChocko btn-sm w-full"
                 @click="
                   dialog.open('delegate', {
                     validator_address: v.operator_address,
@@ -452,8 +456,8 @@ function mapDelegators(messages: any[]) {
       <div>
         <CommissionRate :commission="v.commission"></CommissionRate>
       </div>
-      <div class="bg-base-100 rounded shadow relative overflow-auto">
-        <div class="text-lg font-semibold text-main px-4 pt-4">
+      <div class="bg-customDark rounded shadow relative overflow-auto">
+        <div class="text-lg font-semibold text-customMilk px-4 pt-4">
           {{ $t('staking.commissions_&_rewards') }}
         </div>
         <div
@@ -465,10 +469,10 @@ function mapDelegators(messages: any[]) {
             <div
               v-for="(i, k) in commission"
               :key="`reward-${k}`"
-              color="info"
+              color=""
               label
               variant="outlined"
-              class="mr-1 mb-1 badge text-xs"
+              class="border mr-1 mb-1 badge text-xs"
             >
               {{ format.formatToken2(i) }}
             </div>
@@ -484,7 +488,7 @@ function mapDelegators(messages: any[]) {
           <div class="">
             <label
               for="withdraw_commission"
-              class="btn btn-primary w-full"
+              class="btn btn-customChocko w-full"
               @click="
                 dialog.open('withdraw_commission', {
                   validator_address: v.operator_address,
@@ -495,7 +499,7 @@ function mapDelegators(messages: any[]) {
           </div>
         </div>
       </div>
-      <div class="bg-base-100 rounded shadow overflow-x-auto">
+      <div class="bg-customDark rounded shadow overflow-x-auto">
         <div class="px-4 pt-4 mb-2 text-main font-lg font-semibold">
           {{ $t('staking.addresses') }}
         </div>
@@ -510,7 +514,7 @@ function mapDelegators(messages: any[]) {
                 />
               </div>
             <RouterLink
-              class="text-xs text-primary"
+              class="text-xs text-customMilk"
               :to="`/${chain}/account/${addresses.account}`"
             >
               {{ addresses.account }}
@@ -565,7 +569,7 @@ function mapDelegators(messages: any[]) {
       </div>
     </div>
 
-    <div v-if="delegations.delegation_responses" class="mt-5 bg-base-100 shadow rounded p-4 ">
+    <div v-if="delegations.delegation_responses" class="mt-5 bg-customDark shadow rounded p-4 ">
       <div class="text-lg mb-4 font-semibold">{{ $t('account.delegations') }}
         <span class="float-right"> {{ delegations.delegation_responses?.length || 0 }} / {{ delegations.pagination?.total || 0 }} </span>
       </div>
@@ -579,10 +583,10 @@ function mapDelegators(messages: any[]) {
           </thead>
           <tbody>
             <tr v-for="{balance, delegation} in delegations.delegation_responses">
-              <td class="text-sm text-primary">
+              <td class="text-sm text-customMilk">
                 {{ delegation.delegator_address }}
               </td>
-              <td class="truncate text-primary">
+              <td class="truncate text-customMilk">
                 {{ format.formatToken(balance)}}
               </td>
               
@@ -593,7 +597,7 @@ function mapDelegators(messages: any[]) {
       </div>
     </div>
 
-    <div class="mt-5 bg-base-100 shadow rounded p-4">
+    <div class="mt-5 bg-customDark shadow rounded p-4">
       <div class="text-lg mb-4 font-semibold">{{ $t('account.transactions') }}</div>
       <div class="rounded overflow-auto">
         <table class="table validatore-table w-full">
@@ -607,12 +611,12 @@ function mapDelegators(messages: any[]) {
           </thead>
           <tbody>
             <tr v-for="(item, i) in txs.tx_responses">
-              <td class="text-sm text-primary">
+              <td class="text-sm text-customMilk">
                 <RouterLink :to="`/${props.chain}/block/${item.height}`">{{
                   item.height
                 }}</RouterLink>
               </td>
-              <td class="truncate text-primary" style="max-width: 200px">
+              <td class="truncate text-customMilk" style="max-width: 200px">
                 <RouterLink :to="`/${props.chain}/tx/${item.txhash}`">
                   {{ item.txhash }}
                 </RouterLink>
@@ -637,19 +641,19 @@ function mapDelegators(messages: any[]) {
       </div>
     </div>
 
-    <div class="mt-5 bg-base-100 shadow rounded p-4">
+    <div class="mt-5 bg-customDark shadow rounded p-4">
       <div class="text-lg mb-4 font-semibold">
         <div class="tabs tabs-boxed bg-transparent">
                 
                 <span class="mr-10">Voting Power Events: </span>
                 <a
-                    class="tab text-grey-400"
+                    class="tab text-customMilk"
                     :class="{ 'tab-active': selectedEventType === EventType.Delegate }"
                     @click="loadPowerEvents(1, EventType.Delegate)"
                     >{{ $t('account.btn_delegate') }}</a
                 >
                 <a
-                    class="tab text-grey-400"
+                    class="tab text-customMilk"
                     :class="{ 'tab-active': selectedEventType === EventType.Unbond }"
                     @click="loadPowerEvents(1, EventType.Unbond)"
                     >{{ $t('account.btn_unbond') }}</a
@@ -665,7 +669,7 @@ function mapDelegators(messages: any[]) {
           </thead>
           <tbody>
             <tr v-for="(item, i) in events.tx_responses">
-              <td class="pr-2 truncate text-primary" style="max-width: 250px">
+              <td class="pr-2 truncate text-customMilk" style="max-width: 250px">
                 <RouterLink v-for="d in mapDelegators(item.tx?.body?.messages)" :to="`/${props.chain}/account/${d}`">
                   {{ d }}
                 </RouterLink> 
@@ -690,7 +694,7 @@ function mapDelegators(messages: any[]) {
                 </div>
               </td>
               <td width="150">
-                <RouterLink class="text-primary mb-0" :to="`/${props.chain}/block/${item.height}`">{{
+                <RouterLink class="text-customMilk mb-0" :to="`/${props.chain}/block/${item.height}`">{{
                   item.height
                 }}</RouterLink><br>
                 <span class="text-xs pt-0 mt-0">{{ format.toDay(item.timestamp, 'from') }}</span>

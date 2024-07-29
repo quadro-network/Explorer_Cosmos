@@ -75,7 +75,7 @@ function changeEndpoint(item: Endpoint) {
         </div>
       </div>
 
-      <div class="px-4 py-2 text-sm text-grey-400">Information</div>
+      <div class="px-4 py-2 text-sm text-secondary">Information</div>
       <div class="w-full">
         <div class="py-2 px-4">
           Chain Id: {{ baseStore.latest.block?.header.chain_id && baseStore.connected

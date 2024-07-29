@@ -1,0 +1,27 @@
+{
+    "chain_name": "crossfi",
+    "registry_name": "crossfi",
+    "api": [
+        {"provider": "Quadro.Network", "address": "https://api.crossfi.quadro.network"},
+        {"provider": "STAKR.space", "address": "https://crossfi.api.srv.stakr.space"}
+    ],
+    "rpc": [
+        {"provider": "Quadro.Network", "address": "https://rpc.crossfi.quadro.network"},
+        {"provider": "STAKR.space", "address": "https://crossfi-rpc.srv.stakr.space"}
+    ],
+    "network": "testnet",
+    "snapshot_provider": "",
+    "sdk_version": "v0.46.13",
+    "keplr_features": ["eth-address-gen", "eth-key-sign"],
+    "coin_type": "60",
+    "min_tx_fee": "5000000000000000",
+    "addr_prefix": "mx",
+    "logo": "https://assets.quadro.network/img/cross.svg",
+    "assets": [{
+        "base": "mpx",
+        "symbol": "PX",
+        "exponent": "18",
+        "coingecko_id": "crossfi",
+        "logo": "https://assets.quadro.network/img/cross.svg"
+    }]
+}

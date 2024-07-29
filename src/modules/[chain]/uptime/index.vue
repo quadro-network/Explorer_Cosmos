@@ -202,7 +202,7 @@ function fetchAllKeyRotation() {
         class="alert alert-warning my-4">
         Note: Please load rotated keys to see the correct uptime
       </div>
-      <!-- grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-4 mt-4 -->
+    
       <div :class="tab === '2' ? '' : 'hidden'">
         <div class="flex flex-row flex-wrap gap-x-4 mt-4 justify-center">
           <div v-for="(unit, i) in grid" :key="i">

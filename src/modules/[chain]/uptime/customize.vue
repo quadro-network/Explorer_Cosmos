@@ -160,7 +160,7 @@ function color(v: string) {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(v, i) in list" class="hover">
+          <tr v-for="(v, i) in list" class="hover hover:customChocko">
             <td>{{ i+1 }}</td>
             <td class=" capitalize">{{ v.chainName }}</td>
             <td>{{ v.v.name }}</td>
@@ -187,9 +187,9 @@ function color(v: string) {
     <input type="checkbox" id="add-validator" class="modal-toggle" @change="initial" />
     <div class="modal">
       <div class="modal-box relative">
-        <label for="add-validator" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <label for="add-validator" class="bg-customChocko btn btn-sm btn-circle absolute right-2 top-2">✕</label>
         <h3 class="text-lg font-bold">{{ $t('uptime.add_validators') }}</h3>
-          <div class="form-control my-5 border-2">
+          <div class="form-control bg-customDark my-5 border-2">
             <div class="input-group input-group-md">
             <select v-model="selectChain" class="select select-bordered capitalize" @change="changeChain">
               <option v-for="v in dashboard.chains" :value="v.chainName">

@@ -73,7 +73,7 @@ dayjs()
   <div class="items-center #new1">
     <!-- sidebar -->
     <div
-      class="w-64 fixed z-50 left-0 top-0 bottom-0 overflow-auto backdrop-blur-md  border-grey-100 dark:border-grey-700"
+      class="w-64 fixed z-50 left-0 top-0 bottom-0 overflow-auto backdrop-blur-md  dark:border-grey-700"
       :class="{ block: sidebarShow, 'hidden xl:!block': !sidebarShow }"
     >
       <div class="flex justify-between mt-1 pl-4 py-4 mb-1">
@@ -127,7 +127,7 @@ dayjs()
               class="w-6 h-6 items-center rounded-full mr-3"
             />
             <div
-              class=" items-center capitalize flex-1  text-customMilk whitespace-nowrap"
+              class="bg-customDark items-center capitalize flex-1  text-customMilk whitespace-nowrap"
             >
               {{ item?.title }}
             </div>
@@ -144,24 +144,27 @@ dayjs()
           <div class="collapse-content">
             <div v-for="(el, key) of item?.children"  class="menu w-full !p-0">
               <RouterLink
-                v-if="isNavLink(el)"
-                @click="sidebarShow = false"
-                class="flex items-center border-customMilk py-3 backdrop-blur-md mb-4 rounded px-4 sticky top-0 z-10 hover:bg-customDark "
-                :class="{
-                  '': selected($route, el),
-                }"
-                :to="el.to"
-              >
-              <img style="width: 20px; height: 20px; display: inline-block; margin-right: 10px; vertical-align: middle;" src="https://assets.quadro.network/img/angle-circle-right.png" alt="angle-circle-right" />
-                <div
-                  class="text-base capitalize text-grey-500 dark:text-grey-300"
-                  :class="{
-                    '!text-white': selected($route, el),
-                  }"
-                >
-                  {{ item?.title === 'Favorite' ? el?.title : $t(el?.title) }}
-                </div>
-              </RouterLink>  
+    type="button"
+    v-if="isNavLink(el)"
+    @click="sidebarShow = false"
+    class="btn_menu_explorer btn_menu_expl"
+    :class="{
+      '': selected($route, el),
+    }"
+    :to="el.to"
+  >
+
+    <div
+      class="strong text-secondary text-base capitalize dark:text-grey-300"
+      :class="{
+        '!text-white': selected($route, el),
+      }"
+    >
+      {{ item?.title === 'Favorite' ? el?.title : $t(el?.title) }}
+    </div>
+  </RouterLink>
+     
+
             </div>
           </div>
         </div>
@@ -170,9 +173,8 @@ dayjs()
           v-if="isNavLink(item)"
           :to="item?.to"
           @click="sidebarShow = false"
-          class="cursor-pointer border rounded-lg px-4 flex items-center py-2 text-grey-100  hover:bg-customChocko dark:hover:bg-[#141414]"
+          class="cursor-pointer  hover:bg-customChocko rounded-lg px-4 flex items-center py-2 text-grey-100  "
         >
-       
  
           <div
             class="text-base items-center capitalize flex-1 text-grey-100 dark:text-grey-200 whitespace-nowrap"
@@ -189,7 +191,7 @@ dayjs()
         </RouterLink>
         <div
           v-if="isNavTitle(item)"
-          class="px-4 text-sm text-grey-400 pb-2 uppercase"
+          class="px-4 text-sm text-secondary pb-2 uppercase"
         >
           {{ item?.heading }}
         </div>
@@ -207,11 +209,11 @@ dayjs()
         <a
           href="https://twitter.com/quadro_network"
           target="_blank"
-          class="flex items-center py-3 backdrop-blur-md mb-4 rounded px-4 sticky top-0 z-10 hover:bg-customDark"
+          class="flex btn_menu_explorer btn_menu_expl items-center py-3 backdrop-blur-md mb-4 rounded px-4 sticky top-0 z-10 text-secondary "
         >
         <img  style="width: 20px; margin-right: 5px; height: 20px;" src="https://assets.quadro.network/img/qr/twitter.svg" alt="" />
           <div
-            class=" flex-1 text-grey-100 dark:text-grey-50"
+            class=" flex-1 text-links text-grey-100 dark:text-grey-50"
           >
              Twitter
           </div>
@@ -221,11 +223,11 @@ dayjs()
         <a
           href="https://github.com/quadro-network"
           target="_blank"
-          class="flex items-center  py-3 backdrop-blur-md mb-4 rounded px-4 sticky top-0 z-10 hover:bg-customDark"
+          class="flex btn_menu_explorer btn_menu_expl items-center  py-3 backdrop-blur-md mb-4 rounded px-4 sticky top-0 z-10 text-secondary "
         >
         <img style="width: 20px; margin-right: 5px; height: 20px;" src="https://assets.quadro.network/img/qr/git.svg" alt="" />
           <div
-            class="text-base capitalize flex-1 text-grey-100 dark:text-grey-200"
+            class="text-base text-links capitalize flex-1  text-grey-100 dark:text-grey-200"
           >
              GitHub
           </div>
@@ -277,3 +279,77 @@ dayjs()
     </div>
   </div>
 </template>
+<style scoped>
+.btn_menu_explorer {
+  display: flex;
+
+  justify-content: center; 
+  align-items: center;
+  width: 170px;
+  overflow: hidden;
+  height: 3rem;
+  background-size: 300% 300%;
+  transition: 0.5s;
+  margin-bottom: 10px;
+  animation: gradient_301 5s ease infinite;
+  border: double 4px transparent;
+  background-color: #000000;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+strong {
+  z-index: 4;
+  font-style: normal;
+  font-size: 16px;
+  margin-left: 2%;
+}
+
+.circle-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: orbit 5s linear infinite;
+}
+
+.circle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  filter: blur(2rem);
+}
+
+.circle:nth-of-type(1) {
+  background: #c9f31d;
+  animation: orbit 8s linear infinite;
+}
+
+.btn_menu_explorer:hover {
+  transform: scale(1.1);
+  color: #c9f31d;
+  border-bottom: #c9f31d solid 2px;
+  width: 140px;
+  background-color: transparent;
+}
+
+.btn_menu_expl:active {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  background-color: transparent;
+  transform: scale(0.95);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  animation: none;
+  border-radius: 7rem; 
+  width: 165px;
+}
+
+.text-links{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+</style>

@@ -10,6 +10,17 @@ export enum EndpointType {
   // webgrpc
 }
 
+export interface Assets {
+  name: string;
+  base: string;
+  display: string;
+  symbol: string;
+  logo_URIs: { svg: string };
+  coingecko_id: string;
+  exponent: string;
+  denom_units: Array<{ denom: string; exponent: number }>;
+}
+
 export interface Endpoint {
   type?: EndpointType;
   address: string;
@@ -55,6 +66,7 @@ export interface DirectoryChain {
 
 export interface ChainConfig {
   chainName: string;
+  network_type: string;
   prettyName: string;
   bech32Prefix: string;
   bech32ConsensusPrefix: string;
@@ -85,14 +97,22 @@ export interface ChainConfig {
     low: number,
     average: number,
     high: number,
-  },
+  },  
+  faucet?: {
+    amount: string,
+    ip_limit: number,
+    address_limit: number,
+    fees: string
+  };
 }
 
 export interface LocalConfig {
   addr_prefix: string;
   consensus_prefix?: string;
   alias: string;
+  network_type: string;
   api: string[] | Endpoint[];
+  grpc: Endpoint[];
   provider_chain: {
     api: string[] | Endpoint[]
   }
@@ -118,6 +138,12 @@ export interface LocalConfig {
     high: number,
   },
   keplr_features: string[],
+  faucet?: {
+    amount: string,
+    ip_limit: number,
+    address_limit: number,
+    fees: string
+  };
 }
 
 function apiConverter(api: any[]) {
@@ -138,19 +164,21 @@ function apiConverter(api: any[]) {
 
 export function fromLocal(lc: LocalConfig): ChainConfig {
   const conf = {} as ChainConfig;
-  conf.assets = lc.assets.map((x) => ({
-    name: x.base,
-    base: x.base,
-    display: x.symbol,
-    symbol: x.symbol,
-    logo_URIs: { svg: x.logo },
-    coingecko_id: x.coingecko_id,
-    exponent: x.exponent,
-    denom_units: [
-      { denom: x.base, exponent: 0 },
-      { denom: x.symbol.toLowerCase(), exponent: Number(x.exponent) },
-    ],
-  }));
+  if(lc.assets && Array.isArray(lc.assets)) {
+    conf.assets = lc.assets.map((x) => ({
+      name: x.base,
+      base: x.base,
+      display: x.symbol,
+      symbol: x.symbol,
+      logo_URIs: { svg: x.logo },
+      coingecko_id: x.coingecko_id,
+      exponent: x.exponent,
+      denom_units: [
+        { denom: x.base, exponent: 0 },
+        { denom: x.symbol.toLowerCase(), exponent: Number(x.exponent) },
+      ],
+    }));
+  }
   conf.versions = {
     cosmosSdk: lc.sdk_version
   }
@@ -158,10 +186,12 @@ export function fromLocal(lc: LocalConfig): ChainConfig {
   conf.bech32ConsensusPrefix = lc.consensus_prefix ?? lc.addr_prefix + 'valcons';
   conf.chainName = lc.chain_name;
   conf.coinType = lc.coin_type;
+  conf.network_type = lc.network_type;
   conf.prettyName = lc.registry_name || lc.chain_name;
   conf.endpoints = {
     rest: apiConverter(lc.api),
     rpc: apiConverter(lc.rpc),
+    grpc: apiConverter(lc.grpc),
   };
   if(lc.provider_chain) {
     conf.providerChain = {
@@ -169,10 +199,9 @@ export function fromLocal(lc: LocalConfig): ChainConfig {
     }
   }
   conf.features = lc.features
-  conf.logo = lc.logo;
+  conf.logo = lc.logo.startsWith('http') ? lc.logo : `https://ping.pub${lc.logo}`;
   conf.keplrFeatures = lc.keplr_features;
   conf.keplrPriceStep = lc.keplr_price_step;
-  conf.themeColor = lc.theme_color;
   return conf;
 }
 
@@ -198,7 +227,7 @@ function pathConvert(path: string | undefined) {
   if (path) {
     path = path.replace(
       'https://raw.githubusercontent.com/cosmos/chain-registry/master',
-      'https://registry.quadro.network'
+      'https://registry.ping.pub'
     );
   }
   return path || '';
@@ -288,7 +317,7 @@ export const useDashboard = defineStore('dashboard', {
       const keys = Object.keys(this.chains) // load all blockchain
       // Object.keys(this.favoriteMap) //only load favorite once it has too many chains
       keys.forEach(k => {
-        if(this.chains[k]) this.chains[k].assets.forEach(a => {
+        if(Array.isArray(this.chains[k]?.assets)) this.chains[k].assets.forEach(a => {
           if(a.coingecko_id !== undefined && a.coingecko_id.length > 0) {
             coinIds.push(a.coingecko_id)
             a.denom_units.forEach(u => {

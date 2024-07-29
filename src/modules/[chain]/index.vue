@@ -253,7 +253,7 @@ const amount = computed({
       </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:!grid-cols-3 lg:!grid-cols-6 mt-4">
+    <div class="grid grid-cols-1 gap-4 mt-6 md:!grid-cols-3 lg:!grid-cols-4 2xl:!grid-cols-5">
       <div v-for="(item, key) in store.stats" :key="key">
         <CardStatisticsVertical v-bind="item" />
       </div>

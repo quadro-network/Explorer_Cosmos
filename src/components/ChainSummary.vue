@@ -25,28 +25,54 @@ const addFavor = (e: Event) => {
 };
 </script>
 <template>
-  <RouterLink
+   <RouterLink
     :to="`/${name}`"
-    class="backdrop-blur-md 
-  hover:bg-grey-100 dark:hover:bg-[#141414] rounded shadow flex items-center px-3 py-3 cursor-pointer"
+    class="backdrop-blur-md card_explorer rounded shadow flex flex-col items-center px-3 py-3 cursor-pointer"
   >
-    <div class="w-8 h-8 rounded-full overflow-hidden">
-      <img :src="conf.logo" />
+    <div class="rounded-full overflow-hidden">
+      <img :src="conf.logo" class="logo_chain" />
     </div>
-    <div class="font-semibold ml-4 text-base flex-1 truncate capitalize">
+    <div class="font-semibold mt-4 text-secondary text-center capitalize">
       {{ conf?.prettyName || props.name }}
     </div>
-    <div
-    style="display: none"
-      @click="addFavor"
-      class="pl-4 text-xl"
-      :class="{
-        'text-lime-300': dashboardStore?.favoriteMap?.[props.name],
-        'text-grey-50 dark:text-grey-500':
-          !dashboardStore?.favoriteMap?.[props.name],
-      }"
-    >
-      <Icon icon="mdi-star" />
-    </div>
+
   </RouterLink>
 </template>
+
+
+<style scoped>
+.card_explorer {
+  justify-content: center; 
+  align-items: center;
+ width: 150px;
+ height: 184px;
+ border-radius: 30px;
+ margin-left: 10px;
+ margin-bottom: 40px;
+ background: #212121;
+ box-shadow:  10px 5px 30px rgb(25, 25, 25),
+ -10px -10px 10px rgb(60, 60, 60);
+}
+.card_explorer:hover .logo {
+  animation: spin 1s infinite linear;
+}
+.logo_chain {
+width: 120px;
+height: 120px;
+  transition: transform 0.5s ease;
+}
+
+.logo_chain:hover {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
