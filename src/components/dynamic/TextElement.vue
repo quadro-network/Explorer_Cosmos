@@ -43,9 +43,9 @@ const text = computed(() => {
 const names = ref([] as {name?: string | null, provider?: string}[])
 
 onMounted(() => {
-  if(isAddress()) nameMatcha.lookupAll(props.value).then(re => {
-    names.value = Object.keys(re).map(key => ({name: re[key], provider: key})).filter( x => x.name)
-  })
+  // if(isAddress()) nameMatcha.lookupAll(props.value).then(re => {
+  //   names.value = Object.keys(re).map(key => ({name: re[key], provider: key})).filter( x => x.name)
+  // })
 })
 const toHexOutput = ref(false)
 const isConvertable = computed(() => {
